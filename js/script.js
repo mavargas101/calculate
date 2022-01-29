@@ -66,7 +66,6 @@ function updateDisplay(){
     display.innerText = currentDisplay;
     prevDisplay.innerText = `${previousDisplay} ${currentOperator}`;
 }
-
 function calculate(num1, num2){
     if(currentDisplay != ""){
     switch (currentOperator){
