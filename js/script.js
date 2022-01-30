@@ -1,8 +1,8 @@
 let currentDisplay = "";
 let previousDisplay = "";
-let currentOperator = "0";
+let currentOperator = "";
 
-const maxCharacters = 8;
+const maxCharacters = 100;
 
 // EVENT LISTENERS
 const numbers = document.querySelectorAll(".numberBtn");
@@ -13,7 +13,8 @@ for(let i = 0; i < numbers.length; i++){
 const operations = document.querySelectorAll(".operationBtn");
 for(let i = 0; i < operations.length; i++){
     operations[i].addEventListener('click', function(){
-        if(currentDisplay != "0"){
+        if(!isNaN(currentDisplay)){
+        if(currentDisplay != "0" || currentDisplay != ''){
             if(currentOperator != ""){calculate(previousDisplay, currentDisplay)}
             currentOperator = operations[i].innerText;
             previousDisplay = `${currentDisplay}`;
@@ -21,10 +22,11 @@ for(let i = 0; i < operations.length; i++){
             currentDisplay = "0";
         }else{
             currentOperator = operations[i].innerText;
-            currentDisplay = previousDisplay;
+            prevDisplay = '0';
             updateDisplay();
             currentDisplay = "0";
         }
+    }
     })
 }
 
@@ -77,13 +79,19 @@ function multiply(num1, num2){
     return num1 * num2;
 }
 function divide(num1, num2){
+    if(num2 == 0){return "Cannot divide by zero"}
     return num1 / num2;
 }
 function updateDisplay(){
-    display.innerText = currentDisplay;
+    display.innerText = Number(currentDisplay).toLocaleString();
     prevDisplay.innerText = `${previousDisplay} ${currentOperator}`;
 }
+
+// currentDisplay.length <= 8 ? Number(currentDisplay).toLocaleString() : Number(currentDisplay).toExponential(2).toString() // FOR EXPONENTIAL FORM, GOTTA FIX SOME SHIT FIRST THOUGH
+
 function calculate(num1, num2){
+
+    
     if(currentDisplay != ""){
         switch (currentOperator){
             case '+':
@@ -107,3 +115,4 @@ function calculate(num1, num2){
         updateDisplay();
     }
 }
+allClear();
