@@ -1,6 +1,6 @@
 let currentDisplay = "";
 let previousDisplay = "";
-let currentOperator = "";
+let currentOperator = "0";
 
 const maxCharacters = 8;
 
@@ -13,18 +13,18 @@ for(let i = 0; i < numbers.length; i++){
 const operations = document.querySelectorAll(".operationBtn");
 for(let i = 0; i < operations.length; i++){
     operations[i].addEventListener('click', function(){
-        if(currentDisplay != ""){
+        if(currentDisplay != "0"){
             if(currentOperator != ""){calculate(previousDisplay, currentDisplay)}
             currentOperator = operations[i].innerText;
             previousDisplay = `${currentDisplay}`;
             updateDisplay();
-            currentDisplay = "";
+            currentDisplay = "0";
             console.log(`Ran thru and ${previousDisplay}`);
         }else{
             currentOperator = operations[i].innerText;
             currentDisplay = previousDisplay;
             updateDisplay();
-            currentDisplay = "";
+            currentDisplay = "0";
         }
     })
 }
@@ -38,6 +38,9 @@ const prevDisplay = document.querySelector('.prevDisplay');
 const allClearBtn = document.querySelector('.allClearBtn');
 allClearBtn.addEventListener('click', () => allClear());
 
+const ellipsisBtn = document.querySelector('.ellipsisBtn');
+ellipsisBtn.addEventListener('click', () => appendEllipsis());
+
 function allClear(){
     currentDisplay = "0";
     previousDisplay = "";
@@ -47,6 +50,13 @@ function allClear(){
 function appendNumber(button){
     if(currentDisplay == 0){currentDisplay = button.innerText}
     else if(currentDisplay.length <= maxCharacters){currentDisplay += button.innerText;}
+    updateDisplay();
+}
+
+function appendEllipsis(){
+    if(!currentDisplay.includes('.')){
+        currentDisplay += '.';
+    }
     updateDisplay();
 }
 
@@ -71,19 +81,19 @@ function calculate(num1, num2){
     switch (currentOperator){
             case '+':
                 previousDisplay += ` ${currentOperator} ${num2} =`;
-                currentDisplay = add(parseInt(num1), parseInt(num2));
+                currentDisplay = add(parseFloat(num1), parseFloat(num2));
                 break;
             case '-':
                 previousDisplay += ` ${currentOperator} ${num2} =`;
-                currentDisplay = subtract(parseInt(num1), parseInt(num2));
+                currentDisplay = subtract(parseFloat(num1), parseFloat(num2));
                 break;
             case '*':
                 previousDisplay += ` ${currentOperator} ${num2} =`;
-                currentDisplay = multiply(parseInt(num1), parseInt(num2));
+                currentDisplay = multiply(parseFloat(num1), parseFloat(num2));
                 break;
             case '/':
                 previousDisplay += ` ${currentOperator} ${num2} =`;
-                currentDisplay = divide(parseInt(num1), parseInt(num2));
+                currentDisplay = divide(parseFloat(num1), parseFloat(num2));
                 break;
         } 
         currentOperator = '';
