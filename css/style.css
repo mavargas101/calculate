@@ -2,6 +2,19 @@
     box-sizing: border-box;
     font-family: 'Fira Sans', sans-serif;
 }
+header{
+    padding-top: 50px;
+}
+h1{
+    text-align: center;
+}
+footer{
+    padding-top: 200px;
+}
+h3{
+    text-align: center;
+}
+
 main{
     max-width: 500px;;
     margin:auto;
@@ -25,12 +38,18 @@ section{
 }
 
 .display{
+    width: 100%;
     font-size: 80px;
     min-height: 1em;
     vertical-align: middle;
+    text-align: right;
 }
 .prevDisplay{
+    width: 100%;
     font-size: 40px;
+    min-height: 1em;
+    text-align: right;
+
 }
 
 button.allClearBtn, button.delBtn{
