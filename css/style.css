@@ -4,16 +4,12 @@
 }
 main{
     max-width: 500px;;
-
     margin:auto;
     padding-top: 200px;
-
-
     display:flex;
     flex-direction: column;
     gap: 5px;
     align-items: center;
-
 }
 
 section{
@@ -30,13 +26,12 @@ section{
 
 .display{
     font-size: 80px;
-    min-height: 128px;
+    min-height: 1em;
     vertical-align: middle;
 }
 .prevDisplay{
     font-size: 40px;
 }
-
 
 button.allClearBtn, button.delBtn{
     width: 203px;

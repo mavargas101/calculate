@@ -19,7 +19,6 @@ for(let i = 0; i < operations.length; i++){
             previousDisplay = `${currentDisplay}`;
             updateDisplay();
             currentDisplay = "0";
-            console.log(`Ran thru and ${previousDisplay}`);
         }else{
             currentOperator = operations[i].innerText;
             currentDisplay = previousDisplay;
@@ -41,10 +40,18 @@ allClearBtn.addEventListener('click', () => allClear());
 const ellipsisBtn = document.querySelector('.ellipsisBtn');
 ellipsisBtn.addEventListener('click', () => appendEllipsis());
 
+const delBtn = document.querySelector('.delBtn');
+delBtn.addEventListener('click', () => removeNumber())
+
 function allClear(){
     currentDisplay = "0";
     previousDisplay = "";
     currentOperator = "";
+    updateDisplay();
+}
+function removeNumber(){
+    currentDisplay = currentDisplay.slice(0, currentDisplay.length -1);
+    if(currentDisplay.length === 0){ currentDisplay = '0'}
     updateDisplay();
 }
 function appendNumber(button){
@@ -78,7 +85,7 @@ function updateDisplay(){
 }
 function calculate(num1, num2){
     if(currentDisplay != ""){
-    switch (currentOperator){
+        switch (currentOperator){
             case '+':
                 previousDisplay += ` ${currentOperator} ${num2} =`;
                 currentDisplay = add(parseFloat(num1), parseFloat(num2));
@@ -97,7 +104,6 @@ function calculate(num1, num2){
                 break;
         } 
         currentOperator = '';
-    
-    updateDisplay();
+        updateDisplay();
     }
 }
